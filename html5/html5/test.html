@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <body>
+     <canvas id="demo" width="500" height="500" style="border:1px solid red"></canvas>
+	 <script>
+	   var canvas=document.getElementById("demo");
+	   var cxt=canvas.getContext('2d');
+	  
+			
+	   var flag=0;		
+			
+			canvas.onmousedown=function(evt){
+				evt=window.event || evt;
+				//alert(evt.pageX+"---"+evt.pageY);
+				var startX=evt.pageX-this.offsetLeft;
+				var startY=evt.pageY-this.offsetTop;
+				//alert(startX+"--"+startY);
+				cxt.strokeStyle="black";
+				cxt.beginPath();
+				window.prompt("shu ru");
+				cxt.moveTo(startX,startY);
+			    flag=1;	
+			}
+			canvas.onmousemove=function(evt){
+			    evt=window.event||evt;
+				
+              var endX=evt.pageX-this.offsetLeft;
+				var endY=evt.pageY-this.offsetTop;
+			   if(flag==1){
+			     cxt.lineTo(endX,endY);
+				
+				 cxt.stroke();
+			  }
+			}
+			canvas.onmouseup=function(){
+			 flag=0;
+			}
+			canvas.onmouseout=function(){
+			  flag=0;
+			}
+			
+	 </script>
+  </body>
+</html>

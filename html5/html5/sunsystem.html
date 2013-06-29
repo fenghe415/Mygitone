@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head></head>
+  <body>
+    <canvas id="sunsystem" width="1000" height="1000" style="background-color:#000" >
+      您的浏览器不支持canvas标签！
+    </canvas>
+   <script>
+     var cxt=document.getElementById("sunsystem").getContext("2d");
+	 function drawTrack(){
+		 for(var i=1;i<9;i++){
+			 cxt.beginPath();
+			 cxt.arc(500,400,40*i,0,360,true);
+			 cxt.closePath();
+			 cxt.strokeStyle="#fff";
+			 cxt.stroke();  
+			 }
+		 }
+     drawTrack();
+	 
+	 function stars(x,y,radius,circle,scolor,ecolor){
+		 this.x=x;
+		 this.y=y;
+		 this.radius=radius;
+		 this.circle=circle;
+		 this.scolor=scolor;
+		 this.ecolor=ecolor;
+		 this.time=0;
+		 this.color=null;
+		this.draw=function(){
+			 cxt.save();
+			 cxt.translate(500,400);
+			 cxt.rotate(this.time*360/this.circle*Math.PI/180);
+			 cxt.beginPath();
+			 cxt.arc(this.x,this.y,this.radius,0,360,false);
+			 
+			 cxt.closePath();
+			 this.color=cxt.createRadialGradient(this.x,this.y,0,this.x,this.y,this.radius);
+			 this.color.addColorStop(0,this.scolor);//渐变开始点和颜色
+			this.color.addColorStop(1,this.ecolor);//渐变结束点和颜色
+			cxt.fillStyle=this.color;//将渐变对象复制给填充画笔
+					//填充星球
+			cxt.fill();
+					
+			 cxt.restore();
+			 this.time+=1;
+			 
+			 }
+		 }	
+		
+		function Sun(){
+			stars.call(this,0,0,20,0,"#F00","#f90");
+			} 	 
+		function Mercury(){
+			stars.call(this,0,-40,10,87.70,"#A69697","#5C3E40");
+			}	
+		function Venus(){
+			stars.call(this,0,-80,10,224.701,"#C4BBAC", "#1F1315");
+			}	
+		function Earth(){
+			stars.call(this,0,-120,10,365.2422,"#78B1E8", "#050C12");
+			}	
+		function Mars(){
+			stars.call(this,0,-160,10,686.98,"#CEC9B6","#76422D");
+			}	
+		function Jupiter(){
+			stars.call(this,0,-200,10,4332.589,"#C0A48E","#322222");
+			}	
+		function Saturn(){
+				stars.call(this,0,-240,10,10759.5,"#F7F9E3","#5C4533");
+			}
+			
+			//创建一个天王星的对象构造方法
+			function Uranus(){
+				stars.call(this,0,-280,10,30799.095,"#A7E1E5","#19243A");
+			}
+			//创建一个天王星的对象构造方法
+			function Neptune(){
+				stars.call(this,0,-320,10,60152,"#0661B2","#1E3B73");
+			}	
+		var sun=new Sun();
+		var water=new Mercury();
+			//创建金星对象实例
+			var gold=new Venus();
+			//创建一个地球对象实例
+			var diqiu=new Earth();
+			//创建一个火星对象实例
+			var fire=new Mars();
+			//创建一个木星对象实例
+			var wood=new Jupiter();
+			//创建一个土星对象实例
+			var soil=new Saturn();
+			//创建一个天王星对象实例
+			var god=new Uranus();
+			//创建一个海王星对象实例
+			var sea=new Neptune();
+	 function move(){
+		 cxt.clearRect(0,0,1000,1000);
+		  drawTrack();
+		  sun.draw();
+				water.draw();
+				gold.draw();
+				diqiu.draw();
+				fire.draw();
+				wood.draw();
+				soil.draw();
+				god.draw();
+				sea.draw();
+		 }			
+		setInterval(move,10);
+   </script>
+  </body>
+  
+</html>

@@ -1,0 +1,124 @@
+<!Doctype html>
+<html>
+  <head>
+    
+   </head>
+  <body>
+    <canvas id="clock" width="800" height="800">
+      您的浏览器不支持canvas
+    </canvas>
+    <script>
+	 
+      var click=document.getElementById("clock");
+	  var cxt=click.getContext("2d");
+	  //表盘
+	 
+	  function move(){
+	  cxt.clearRect(0,0,800,800);
+	  var now=new Date();
+	  var sec=now.getSeconds();
+	  var min=now.getMinutes();
+	  var hour=now.getHours()+min/60;
+	  hour=hour>12?hour-12:hour;
+	  	  
+	  cxt.lineWidth=10;
+	  cxt.strokeStyle="blue";
+	  cxt.beginPath();
+	  cxt.arc(300,300,200,0,360,false);
+	  cxt.closePath();
+	  cxt.stroke();
+	  //刻度
+	  //时针刻度
+	  for(var i=0;i<12;i++){
+		  cxt.save();
+		  cxt.lineWidth=7;
+		  cxt.strokeStyle="black";
+		  cxt.translate(300,300);
+		  cxt.rotate(30*i*Math.PI/180);
+		  cxt.beginPath();
+		  cxt.moveTo(0,-170);
+		  cxt.lineTo(0,-190);
+		  cxt.closePath();
+		  cxt.stroke();
+		  cxt.restore();
+		  }
+		  //分针刻度
+     for(var i=0;i<60;i++){
+		 cxt.save();
+		 cxt.lineWidth=5;
+		 cxt.strokeStyle="black";
+		  cxt.translate(300,300);
+		 cxt.rotate(6*i*Math.PI/180);
+		 cxt.beginPath();
+		  cxt.moveTo(0,-180);
+		  cxt.lineTo(0,-190);
+		  cxt.closePath();
+		  cxt.stroke();
+		 cxt.restore();
+		 }	
+	//时针
+	            cxt.save();
+				//设置时针风格
+				cxt.lineWidth=7;
+				//设置时针的颜色
+				cxt.strokeStyle="#000";
+				//设置异次元空间的0，0点
+				cxt.translate(300,300);
+				//设置旋转角度
+				cxt.rotate(hour*30*Math.PI/180);
+				cxt.beginPath();
+				cxt.moveTo(0,-140);
+				cxt.lineTo(0,10);
+				cxt.closePath();
+				cxt.stroke();
+				cxt.restore();
+	//分针
+	  cxt.save();
+	  cxt.lineWidth=5;
+	  cxt.strokeStyle="#000";
+	  cxt.translate(300,300);
+	  cxt.rotate(min*6*Math.PI/180);
+	  cxt.beginPath();
+	  cxt.moveTo(0,-150);
+	  cxt.lineTo(0,15);
+	  cxt.closePath();
+	  cxt.stroke();
+	  cxt.restore();
+	 
+	 //秒针
+	  cxt.save();
+	  cxt.lineWidth=3;
+	  cxt.strokeStyle="red";
+	  cxt.translate(300,300);
+	  cxt.rotate(sec*6*Math.PI/180);
+	  cxt.beginPath();
+	  cxt.moveTo(0,-160);
+	  cxt.lineTo(0,20);
+	  cxt.closePath();
+	  cxt.stroke();
+	  
+	  cxt.beginPath();
+	  cxt.arc(0,0,5,0,360,false);
+	  
+	  
+	  cxt.closePath();
+	  cxt.fillStyle="gray";
+	  cxt.fill();
+	  cxt.stroke();
+	  
+	  cxt.beginPath();
+	  cxt.arc(0,-150,5,0,360,false);
+	  
+	  
+	  cxt.closePath();
+	  cxt.fillStyle="gray";
+	  cxt.fill();
+	  cxt.stroke();
+	  
+	  cxt.restore(); 			
+  }
+  move();
+  setInterval(move,1000);
+    </script>
+  </body>
+</html>
